@@ -44,6 +44,8 @@ const Ecommerce = () => {
 
     const [initial, setInitialState] = useState([])
 
+    const [shoppingQtd, setShoppingQtd] = useState(1)
+
     const [showContainer, setShowContainer] = useState(true)
 
     // const showInfoContent = () => {
@@ -57,7 +59,6 @@ const Ecommerce = () => {
 
     useEffect(() => {
         GetData()
-
     }, [])
 
     const GetData = () => {
@@ -139,17 +140,24 @@ const Ecommerce = () => {
     }
 
 
-    const showContent = () => {
+    const showContent = (valor) => {
         const content = document.getElementById("content-info")
-        content.style.transform = "translateX(0%)"
+        content.style.transform = `translateX(${valor}%)`
     }
 
 
-    const mostrar = () => {
-        setShowContainer(!showContainer)
+    const mostrar = (status) => {
+        setShowContainer(status)
         setTimeout(() => {
-            showContent()
+            showContent(0)
         }, 200)
+    }
+
+    const esconder = () => {
+        showContent(100)
+        setTimeout(() => {
+            setShowContainer(true)
+        }, 1000)
     }
 
     const SpinnerLoad = () => {
@@ -160,19 +168,19 @@ const Ecommerce = () => {
         )
     }
 
-
     const ContainerCards = () => {
         return (
             <>
                 {data?.map((e, index) => {
                     return (
-                        <div onClick={() => setInitialState([...initial, { data: e }])} className="conteiner-produtos">
+                        <div onClick={() => setInitialState([...initial, { data: e, qtd: 1 }])} className="conteiner-produtos">
                             <img src={SetImg(e?.id)} alt="" />
                             <div className="texto" >{e?.name}</div>
                             <div className="botao">Adicionar</div>
                         </div>
                     )
-                })}
+                })
+                }
             </>
         )
     }
@@ -180,33 +188,61 @@ const Ecommerce = () => {
     const carContainerSell = () => {
         return (
             <div className="container-content-info" id="content-info">
-                {initial?.map((e, index) => {
-                    return (
-                        <>
-                            <div className="content-info" key={e.data.id}>
-                                <div className="container-block-content">
-                                    <div className="container-img">
-                                        <img src={SetImg(e?.data?.id)} alt="" />
-                                        <div>{e?.data.name}</div>
-                                    </div>
-                                    <div className="container-desc-fruit">
-                                        <div>Carboidratos : {e?.data.nutritions?.carbohydrates}</div>
-                                        <div>Açucar : {e?.data.nutritions?.sugar}</div>
-                                        <div>Calorias : {e?.data.nutritions?.calories}</div>
-                                    </div>
-                                    <select name="" id="">
-                                        <option value="">1</option>
-                                        <option value="">2</option>
-                                        <option value="">3</option>
-                                        <option value="">4</option>
-                                        <option value="">Mais de 4</option>
-                                    </select>
-                                    <span id="close-item" class="material-symbols-outlined" onClick={() => mostrar()}>close</span>
+                <div className="clear-shopping" onClick={() => setInitialState([])}>
+                    <span class="material-symbols-outlined">
+                        delete
+                    </span>
+                </div>
+                {initial == 0
+                    ?
+                    <>
+                        <div className="shopping-content">
+                            <div className="shopping-msg-clear">
+                                <div>Seu Carrinho está vazio</div>
+                                <div>
+                                    <span class="material-symbols-outlined">
+                                        shopping_cart
+                                    </span>
                                 </div>
                             </div>
-                        </>
-                    )
-                })}
+                        </div>
+                    </>
+                    : <>
+                        {initial?.map((e, index) => {
+                            console.log(initial[index].qtd)
+                            return (
+                                <>
+                                    <div className="content-info" key={e.data.id}>
+                                        <div className="container-block-content">
+                                            <div className="container-img">
+                                                <img src={SetImg(e?.data?.id)} alt="" />
+                                                <div>{e?.data.name}</div>
+                                            </div>
+                                            <div className="container-desc-fruit">
+                                                <div>Carboidratos : {e?.data.nutritions?.carbohydrates}</div>
+                                                <div>Açucar : {e?.data.nutritions?.sugar}</div>
+                                                <div>Calorias : {e?.data.nutritions?.calories}</div>
+                                            </div>
+
+                                            <div className="add-shopping" >
+                                                <div><span className="material-symbols-outlined">
+                                                    add
+                                                </span></div>
+                                                <div>{shoppingQtd}</div>
+                                                <div><span className="material-symbols-outlined">
+                                                    remove
+                                                </span></div>
+                                            </div>
+                                            <span class="material-symbols-outlined">
+                                                delete_forever
+                                            </span>
+                                        </div>
+                                    </div>
+                                </>
+                            )
+                        })}
+                    </>}
+
             </div>
         )
     }
@@ -214,7 +250,6 @@ const Ecommerce = () => {
 
     return (
         <main>
-
             <Header showShopping={mostrar} shopping={initial.length} />
             {data.length == 0 ? SpinnerLoad() : <>{showContainer ? false : <> {carContainerSell()} </>} <div className="conteiner">{showContainer ? <> {ContainerCards()}</> : false}</div></>}
         </main>
