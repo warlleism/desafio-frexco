@@ -1,0 +1,164 @@
+main {
+    background-color: #f7f7f7;
+
+    .conteiner {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        .conteiner-produtos:hover {
+            padding: 2px;
+            transition: 0.5s;
+            box-shadow: rgba(0, 0, 0, 0.513) 1px 5px 10px 1px;
+        }
+
+        .conteiner-produtos {
+            cursor: pointer;
+            position: relative;
+            transition: 0.5s;
+            border-radius: 10px;
+            border: solid rgba(0, 0, 0, 0.116) 1px;
+            background-color: white;
+            color: white;
+            text-decoration: none;
+            align-items: center;
+            margin: 10px;
+            width: 280px;
+            display: flex;
+            flex-direction: column;
+
+
+            img {
+                border-radius: 10px;
+                width: 70%;
+                height: 140px;
+                margin-bottom: 20px;
+            }
+
+            .texto {
+                color: rgb(15, 148, 46);
+                font-weight: 600;
+            }
+
+            .botao {
+                text-align: center;
+                width: 80%;
+                border: rgba(0, 0, 0, 0.279) solid 1px;
+                font-weight: 700;
+                border-radius: 10px;
+                margin: 20px 0px 20px 0px;
+                background-color: rgba(49, 212, 87, 0.293);
+                padding: 15px 0px 15px 0px;
+                color: rgb(41, 113, 58);
+                transition: 0.5s;
+            }
+
+            .botao:hover {
+                background-color: rgba(49, 212, 87, 0.933);
+                color: white;
+                transition: 0.5s
+            }
+
+            .info-content {
+                // opacity: 0;
+                z-index: 999;
+                position: absolute;
+                right: -50%;
+                width: 200px;
+                height: 200px;
+                background-color: black;
+                // display: none;
+                flex-direction: column;
+                text-align: center;
+                justify-content: center;
+                border-radius: 15px;
+
+                div {
+                    margin: 10px;
+                }
+            }
+        }
+    }
+
+    .spinnerLoading {
+        position: absolute;
+        left: 50%;
+        top: 50%,
+    }
+
+
+    .container-content-info {
+        scroll-behavior: smooth;
+        transform: translateX(100%);
+        position: absolute;
+        background-color: #f7f7f7;
+        width: 100%;
+        z-index: 999;
+        transition: 1s ease-in-out;
+
+        .content-info {
+            margin-top: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: black;
+            margin-bottom: 50px;
+
+            .container-block-content {
+                border-radius: 20px;
+                padding: 20px;
+                background-color: rgb(255, 255, 255);
+                width: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                .container-desc-fruit {
+                    position: relative;
+                    color: rgba(0, 0, 0, 0.66);
+                    div{
+                        text-align: center;
+                        color: rgb(18, 162, 136);
+                        font-weight: 600;
+                    }
+                }
+
+                .container-desc-fruit::after {
+                    content: "";
+                    background-color: rgb(18, 162, 136);
+                    width: 0.2%;
+                    height: 100%;
+                    position: absolute;
+                    left: -6%;
+                    top: 0;
+                }
+
+                .container-desc-fruit::before {
+                    content: "";
+                    background-color: rgb(18, 162, 136);
+                    width: 0.2%;
+                    height: 100%;
+                    position: absolute;
+                    left: 106%;
+                    top: 0;
+                }
+
+
+                .container-img {
+                    width: 20%;
+                    display: flex;
+                    align-items: center;
+
+                    img {
+                        border-radius: 100px;
+                        width: 100px;
+                        height: 100px;
+                    }
+                }
+            }
+
+        }
+    }
+}

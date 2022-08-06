@@ -1,0 +1,69 @@
+.header-container {
+    width: 100%;
+    height: 180px;
+    border-bottom: solid rgba(0, 0, 0, 0.1) 2px;
+    position: relative;
+
+    .container-content {
+        margin: 0 auto;
+        display: flex;
+        flex-direction: row;
+        width: 40%;
+        align-items: center;
+
+        img {
+            max-width: 100px;
+        }
+
+        .conteiner-input {
+            width: 100%;
+            position: relative;
+
+            div {
+                pointer-events: none;
+                margin-top: 6px;
+                margin-left: 6px;
+                display: flex;
+                position: absolute;
+                color: rgba(0, 0, 0, 0.323);
+
+                span {
+                    margin-right: 10px;
+                }
+
+            }
+
+            input {
+                width: 70%;
+                border-radius: 5px;
+                border: none;
+                outline: 0;
+                padding: 10px;
+            }
+
+        }
+
+        .shopping-content {
+            position: relative;
+
+            span {
+                cursor: pointer;
+                color: red;
+            }
+
+            div {
+                top: -22px;
+                left: 10px;
+                position: absolute;
+                background-color: red;
+                padding: 2px;
+                width: 20px;
+                text-align: center;
+                color: white;
+                border-radius: 100%;
+            }
+        }
+
+    }
+
+}
