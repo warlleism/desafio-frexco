@@ -99,13 +99,13 @@ main {
 
         .clear-shopping {
             padding: 20px;
+            color: rgba(220, 21, 21, 0.523);
             display: flex;
             justify-content: flex-end;
-            color: rgba(220, 21, 21, 0.523);
-            cursor: pointer;
 
             span {
-                fontx-size: 30px;
+                cursor: pointer;
+                font-size: 30px;
             }
         }
 
@@ -139,13 +139,14 @@ main {
             margin-bottom: 50px;
 
             .container-block-content {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: space-between;
                 border-radius: 20px;
                 padding: 20px;
                 background-color: rgb(255, 255, 255);
                 width: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
 
                 .container-desc-fruit {
                     position: relative;
@@ -155,6 +156,18 @@ main {
                         text-align: center;
                         color: rgb(18, 162, 136);
                         font-weight: 600;
+                    }
+                }
+
+                .container-img {
+                    width: 20%;
+                    display: flex;
+                    align-items: center;
+
+                    img {
+                        border-radius: 100px;
+                        width: 100px;
+                        height: 100px;
                     }
                 }
 
@@ -178,19 +191,6 @@ main {
                     top: 0;
                 }
 
-
-                .container-img {
-                    width: 20%;
-                    display: flex;
-                    align-items: center;
-
-                    img {
-                        border-radius: 100px;
-                        width: 100px;
-                        height: 100px;
-                    }
-                }
-
                 .add-shopping {
                     display: flex;
                     border: 1px solid rgba(34, 35, 36, 0.133);
@@ -203,6 +203,17 @@ main {
                 }
             }
 
+        }
+    }
+}
+
+@media screen and (max-width: 1040px) {
+    .container-content-info {
+        .content-info {
+            width: 100%;
+            .container-block-content {
+                width: 90% !important ;
+            }
         }
     }
 }

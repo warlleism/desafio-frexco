@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Children, useEffect, useState } from "react";
 import { DotLoader } from "react-spinners";
 import Header from "../header";
 import Maca from "../../imagens/maca.png"
@@ -44,22 +44,13 @@ const Ecommerce = () => {
 
     const [initial, setInitialState] = useState([])
 
-    const [shoppingQtd, setShoppingQtd] = useState(1)
-
     const [showContainer, setShowContainer] = useState(true)
 
-    // const showInfoContent = () => {
-    //     const content = window.document.getElementById("contentInfo")
-    //     const info = window.document.getElementById("infoContent")
-
-    //     content?.addEventListener("mouseover", () => {
-    //         info.style.backgroundColor = "red"
-    //     })
-    // }
+    const [itens, setItens] = useState()
 
     useEffect(() => {
         GetData()
-    }, [])
+    }, [initial])
 
     const GetData = () => {
         fetch("http://localhost:3001/fruits")
@@ -153,13 +144,6 @@ const Ecommerce = () => {
         }, 200)
     }
 
-    const esconder = () => {
-        showContent(100)
-        setTimeout(() => {
-            setShowContainer(true)
-        }, 1000)
-    }
-
     const SpinnerLoad = () => {
         return (
             <div className="spinnerLoading">
@@ -173,10 +157,12 @@ const Ecommerce = () => {
             <>
                 {data?.map((e, index) => {
                     return (
-                        <div onClick={() => setInitialState([...initial, { data: e, qtd: 1 }])} className="conteiner-produtos">
-                            <img src={SetImg(e?.id)} alt="" />
-                            <div className="texto" >{e?.name}</div>
-                            <div className="botao">Adicionar</div>
+                        <div key={e.id}>
+                            <div className="conteiner-produtos" id="contents" >
+                                <img src={SetImg(e?.id)} alt="" />
+                                <div className="texto" >{e?.name}</div>
+                                <div className="botao" onClick={() => setInitialState(initial.map((e) => e.data.name).includes(e.name) ? [...initial] : [...initial, { data: e, qtd: 1 }])}>Adicionar</div>
+                            </div>
                         </div>
                     )
                 })
@@ -185,11 +171,17 @@ const Ecommerce = () => {
         )
     }
 
+
+    const deleteItem = (index) => {
+        setInitialState((items) => items.filter((_, i) => i !== index))
+    }
+
+
     const carContainerSell = () => {
         return (
             <div className="container-content-info" id="content-info">
-                <div className="clear-shopping" onClick={() => setInitialState([])}>
-                    <span class="material-symbols-outlined">
+                <div className="clear-shopping">
+                    <span onClick={() => setInitialState([])} class="material-symbols-outlined">
                         delete
                     </span>
                 </div>
@@ -209,31 +201,33 @@ const Ecommerce = () => {
                     </>
                     : <>
                         {initial?.map((e, index) => {
-                            console.log(initial[index].qtd)
                             return (
                                 <>
-                                    <div className="content-info" key={e.data.id}>
+                                    <div className="content-info" key={e?.data?.id}>
                                         <div className="container-block-content">
                                             <div className="container-img">
                                                 <img src={SetImg(e?.data?.id)} alt="" />
-                                                <div>{e?.data.name}</div>
+                                                <div>{e?.data?.name}</div>
                                             </div>
                                             <div className="container-desc-fruit">
-                                                <div>Carboidratos : {e?.data.nutritions?.carbohydrates}</div>
-                                                <div>Açucar : {e?.data.nutritions?.sugar}</div>
-                                                <div>Calorias : {e?.data.nutritions?.calories}</div>
+                                                <div>Carboidratos : {e?.data?.nutritions?.carbohydrates}</div>
+                                                <div>Açucar : {e?.data?.nutritions?.sugar}</div>
+                                                <div>Calorias : {e?.data?.nutritions?.calories}</div>
                                             </div>
-
                                             <div className="add-shopping" >
-                                                <div><span className="material-symbols-outlined">
-                                                    add
-                                                </span></div>
-                                                <div>{shoppingQtd}</div>
-                                                <div><span className="material-symbols-outlined">
-                                                    remove
-                                                </span></div>
+                                                <div>
+                                                    <span className="material-symbols-outlined">
+                                                        add
+                                                    </span>
+                                                </div>
+                                                <div>{e?.qtd}</div>
+                                                <div>
+                                                    <span className="material-symbols-outlined">
+                                                        remove
+                                                    </span>
+                                                </div>
                                             </div>
-                                            <span class="material-symbols-outlined">
+                                            <span class="material-symbols-outlined" onClick={() => setItens(deleteItem(index))}>
                                                 delete_forever
                                             </span>
                                         </div>

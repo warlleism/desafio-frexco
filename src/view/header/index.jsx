@@ -20,10 +20,10 @@ const Header = (props) => {
     return (
         <div className="header-container">
             <div className="container-content">
-                <img src={Logo} alt="" />
+                <img onClick={() => props.showShopping(true)} src={Logo} alt="" style={{ cursor: "pointer" }} />
                 <div className="conteiner-input">
                     <div id="search">
-                        <span class="material-symbols-outlined">
+                        <span className="material-symbols-outlined">
                             search
                         </span>
                         Oque busca?
@@ -31,10 +31,10 @@ const Header = (props) => {
                     <input id="inputText" type="text" onChange={(e) => setSearch(e.target.value)} />
                 </div>
                 <div className="shopping-content">
-                    <span class="material-symbols-outlined" onClick={() => props.showShopping(false)}>
+                    <span className="material-symbols-outlined" onClick={() => props.showShopping(false)}>
                         shopping_cart
                     </span>
-                    <span class="material-symbols-outlined" onClick={() => props.showShopping(true)}>
+                    <span className="material-symbols-outlined" onClick={() => props.showShopping(true)}>
                         storefront
                     </span>
                     <div>{props.shopping}</div>
