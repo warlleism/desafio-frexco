@@ -1,11 +1,11 @@
 
 import React from "react";
-import Ecommerce from "./view/body/index";
+import Rotas from "./rotas/rotas";
 
 function App() {
   return (
     <>
-      <Ecommerce />
+      <Rotas />
     </>
   );
 }

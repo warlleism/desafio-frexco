@@ -1,0 +1,39 @@
+.main-info {
+    .info-conteiner {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+
+        .conteiner-produtos-info {
+            width: 500px;
+            margin: 20px;
+            height: 360px;
+            position: relative;
+
+            .texto-nome {
+                font-size: 1.6rem;
+                color: #16bf9a;
+                margin-bottom: 10px;
+                font-weight: 500;
+                font-style: italic;
+            }
+
+            .texto{
+                font-size: 1.2rem;
+                color: rgb(8, 55, 45);
+            }
+
+            img {
+                z-index: 999;
+                position: absolute;
+                max-width: 400px;
+                left: 70px;
+                top: 0;
+            }
+        }
+    }
+
+}
