@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-import Logo from "../../imagens/logo.png"
 import Fresco from "../../imagens/frexcoLogo.png"
-
+import Nutri from "../../icons/nutrientes.png"
+import Cart from "../../icons/cart.png"
 import "./style.scss"
 
 const Header = (props) => {
@@ -11,6 +11,8 @@ const Header = (props) => {
     const input = document.getElementById("inputText")
     const [search, setSearch] = useState(0)
     const [showContentRes, setShowContentRes] = useState(false)
+
+
 
 
     input?.addEventListener("click", () => {
@@ -39,14 +41,14 @@ const Header = (props) => {
     return (
         <>
             <div className="header-container">
-                <Link to={"/"} style={{ float: "right", padding: "10px", fontSize: "20px" }}>
-                    <span class="material-symbols-outlined" style={{ fontSize: "30px", color: "#2b2b2bb3", background: "#89bd23", borderRadius: "20px" }}>
+                <div style={{ float: "right", padding: "10px", fontSize: "20px" }}>
+                    <span class="material-symbols-outlined" style={{ fontSize: "30px", color: "#ffff", background: "#89bd23", borderRadius: "20px" }} onClick={() => props.showShopping(true)}>
                         arrow_back
                     </span>
-                </Link>
+                </div>
                 <div className="container-content">
                     <Link to={"/"}>
-                        <img src={Fresco} onClick={() => props.showShopping(true)} style={{ cursor: "pointer" }} />
+                        <img src={Fresco} style={{ cursor: "pointer" }} onClick={() => props.showShopping(true)} />
                     </Link>
                     <div className="conteiner-input">
                         <div id="search">
@@ -58,15 +60,14 @@ const Header = (props) => {
                         <input id="inputText" type="text" onChange={(e) => setSearch(e.target.value)} />
                     </div>
                     <div className="shopping-content">
-                        <span className="material-symbols-outlined" onClick={() => props.showShopping(false)}>
-                            shopping_cart
-                        </span>
-                        <div>{props.shopping}</div>
-                        <Link to={"/info"}>
-                            <span className="material-symbols-outlined" onClick={() => props.showShopping(true)}>
-                                storefront
-                            </span>
+                        <Link to={"/"}>
+                            <img src={Cart} alt="" style={{ maxWidth: "40px", cursor: "pointer" }} onClick={() => props.showShopping(false)} />
                         </Link>
+                        <div>{props.shopping}</div>
+                        <a href="#item1">
+                            <img src={Nutri} alt="" style={{ maxWidth: "40px", cursor: "pointer" }} />
+
+                        </a>
                     </div>
                 </div>
             </div>

@@ -25,9 +25,9 @@ const Info = (props) => {
     const ContainerInfoFruits = () => {
         return (
             <>
-                <Header shopping={props.shopping} />
+                {/* <Header shopping={props.shopping} /> */}
                 <div className="main-info">
-                    <div style={{ textAlign: "center", fontSize: "2rem", color: "#16bf9a", fontWeight: "600", marginBottom: 100 }}>NUTRIÇÃO</div>
+                    <div style={{ textAlign: "center", fontSize: "2rem", color: "#16bf9a", fontWeight: "600", marginBottom: 100, marginTop: 100 }}>NUTRIENTES</div>
                     <div className="info-conteiner">
                         {data?.map((e, index) => {
                             return (

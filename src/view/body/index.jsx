@@ -1,8 +1,9 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { DotLoader } from "react-spinners";
 import Header from "../header";
-import Info from "../info";
+import Excluir from "../../icons/excluir.png"
 import Helper from "../../components";
+import Info from "../info"
 
 
 import "./style.scss"
@@ -15,7 +16,6 @@ const Ecommerce = () => {
     const [initial, setInitialState] = useState([])
 
     const [showContainer, setShowContainer] = useState(true)
-
 
     const [itens, setItens] = useState()
 
@@ -83,9 +83,9 @@ const Ecommerce = () => {
         return (
             <div className="container-content-info" id="content-info">
                 <div className="clear-shopping">
-                    <span onClick={() => setInitialState([])} class="material-symbols-outlined">
-                        delete
-                    </span>
+                    {
+                        initial.length == 0 ? false : <><span onClick={() => setInitialState([])} class="material-symbols-outlined">delete</span></>
+                    }
                 </div>
                 {initial == 0
                     ?
@@ -109,7 +109,7 @@ const Ecommerce = () => {
                                         <div className="container-block-content">
                                             <div className="container-img">
                                                 <img src={helper.SetImg(e?.data?.id)} alt="" />
-                                                <div>{e?.data?.name}</div>
+                                                <div style={{ fontSize: "25px", fontWeight: "500", color: "#9ec384" }}>{e?.data?.name}</div>
                                             </div>
                                             <div className="container-desc-fruit">
                                                 <div>Carboidratos : {e?.data?.nutritions?.carbohydrates}</div>
@@ -129,9 +129,7 @@ const Ecommerce = () => {
                                                     </span>
                                                 </div>
                                             </div>
-                                            <span class="material-symbols-outlined" style={{ color: "red", cursor: "pointer" }} onClick={() => setItens(deleteItem(index))}>
-                                                delete_forever
-                                            </span>
+                                            <img src={Excluir} alt="" style={{ maxWidth: "40px", cursor: "pointer" }} onClick={() => setItens(deleteItem(index))} />
                                         </div>
                                     </div>
                                 </>
@@ -145,8 +143,11 @@ const Ecommerce = () => {
 
     return (
         <main>
-            <Header showShopping={mostrar}  shopping={initial.length} />
-            {data.length == 0 ? SpinnerLoad() : <>{showContainer ? false : <> {carContainerSell()} </>} <div className="conteiner">{showContainer ? <> {ContainerCards()}</> : false}</div></>}
+            <Header showShopping={mostrar} shopping={initial.length} />
+            {data.length == 0 ? SpinnerLoad() : <>{showContainer ? false : <div style={{ overflow: "hidden" }}> {carContainerSell()} </div>} <div className="conteiner">{showContainer ? <> {ContainerCards()} <div id="item1">{<Info  />}</div> </> : false}</div></>}
+
+
+
         </main>
     )
 }
