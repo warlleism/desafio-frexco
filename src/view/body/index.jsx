@@ -49,7 +49,7 @@ const Ecommerce = () => {
     const handlesFilter = () => {
         const searchWord = search
         const newFilter = data.filter((value) => {
-            return value.name.includes(searchWord)
+            return value.name.toLowerCase().includes(searchWord)
         })
         setSearchFilter(newFilter)
     }
