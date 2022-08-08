@@ -1,22 +1,24 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { DotLoader } from "react-spinners";
+import { Button } from "@mui/material";
 import Header from "../header";
 import Excluir from "../../icons/excluir.png"
 import Helper from "../../components";
 import Info from "../nutrition"
 
-
 import "./style.scss"
-import { Button } from "@mui/material";
 
 const Ecommerce = () => {
-
 
     const [data, setData] = useState([])
 
     const [initial, setInitialState] = useState([])
 
     const [showContainer, setShowContainer] = useState(true)
+
+    const [showContentProduto, setShowContentProduto] = useState(false)
+
+    const [contentProduto, setContentProduto] = useState([])
 
     const [itens, setItens] = useState()
 
@@ -34,6 +36,12 @@ const Ecommerce = () => {
             })
     }
 
+    const mostrarProduto = (e) => {
+        setShowContainer(!showContainer)
+        setShowContentProduto(!showContentProduto)
+        setContentProduto([e])
+    }
+
     const showContent = (valor) => {
         const content = document.getElementById("content-info")
         content.style.transform = `translateX(${valor}%)`
@@ -42,6 +50,7 @@ const Ecommerce = () => {
 
     const mostrar = (status) => {
         setShowContainer(status)
+        setShowContentProduto(false)
         setTimeout(() => {
             showContent(0)
         }, 200)
@@ -55,6 +64,37 @@ const Ecommerce = () => {
         )
     }
 
+    const ContainerProdutos = () => {
+        return (
+            <>
+                <div className="page-product-content">
+                    {contentProduto?.map((e, index) => {
+                        return (
+                            <div key={e?.id} className="conteiner-page-product">
+                                <div className="img-info">
+                                    <img src={helper.SetImg(e?.id)} alt="" />
+                                </div>
+                                <div className="desc-product">
+                                    <div className="texto-nome-product" >{e?.name}</div>
+                                    <div className="texto-product" > Carboidrato: {e?.nutritions.carbohydrates}</div>
+                                    <div className="texto-product" > Protein: {e?.nutritions.protein}</div>
+                                    <div className="texto-product" > Gordo: {e?.nutritions.fat}</div>
+                                    <div className="texto-product" > Nutritions: {e?.nutritions.calories}</div>
+                                    <div className="texto-product" > Açudar: {e?.nutritions.sugar}</div>
+                                    <Button className="botao-product" variant="contained" color="success" onClick={() => setInitialState(initial.map((e) => e.data.name).includes(e.name) ? [...initial] : [...initial, { data: e }])}>
+                                        <span class="material-symbols-outlined">
+                                            shopping_cart
+                                        </span>  Carrinho
+                                    </Button>
+                                </div>
+                            </div>
+                        )
+                    })}
+                </div>
+            </>
+        )
+    }
+
     const ContainerCards = () => {
         return (
             <>
@@ -62,7 +102,7 @@ const Ecommerce = () => {
                     return (
                         <div key={e.id}>
                             <div className="conteiner-produtos" id="contents" >
-                                <img src={helper.SetImg(e?.id)} alt="" />
+                                <img src={helper.SetImg(e?.id)} alt="" onClick={() => mostrarProduto(e)} />
                                 <div className="texto" >{e?.name}</div>
                                 <Button className="botao" variant="contained" color="success" onClick={() => setInitialState(initial.map((e) => e.data.name).includes(e.name) ? [...initial] : [...initial, { data: e }])}>
                                     Carrinho
@@ -79,16 +119,6 @@ const Ecommerce = () => {
 
     const deleteItem = (index) => {
         setInitialState((items) => items.filter((_, i) => i !== index))
-    }
-
-    const count = (dado) => {
-        initial.map((data) => {
-            let nomes = data.data.name
-            const ocorrencias = (nomes.match(dado) || []).length;
-            console.log(data.data.name)
-        })
-
-
     }
 
     const carContainerSell = () => {
@@ -158,6 +188,20 @@ const Ecommerce = () => {
     return (
         <main>
             <Header showShopping={mostrar} shopping={initial.length} />
+
+            {
+                showContentProduto &&
+                (
+                    <>
+                        <div style={{ float: "right" }}>
+                            <span class="material-symbols-outlined" style={{ padding: "20px", fontSize: "3rem", color: "#16bf9a", cursor: "pointer" }} onClick={() => mostrarProduto()}>
+                                close
+                            </span></div>
+                        {ContainerProdutos()}
+                    </>
+                )
+            }
+
             {data.length == 0 ? SpinnerLoad() : <>{showContainer ? false : <div style={{ overflow: "hidden" }}> {carContainerSell()} </div>} <div className="conteiner">{showContainer ? <> {ContainerCards()} <div id="item1">{<Info />}</div> </> : false}</div></>}
         </main>
     )

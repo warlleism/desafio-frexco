@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react"
 import Helper from "../../components";
-import Header from "../header";
 import "./style.scss"
 
 const Info = (props) => {
@@ -25,7 +24,6 @@ const Info = (props) => {
     const ContainerInfoFruits = () => {
         return (
             <>
-                {/* <Header shopping={props.shopping} /> */}
                 <div className="main-info">
                     <div style={{ textAlign: "center", fontSize: "2rem", color: "#16bf9a", fontWeight: "600", marginBottom: 100, marginTop: 100 }}>NUTRIENTES</div>
                     <div className="info-conteiner">

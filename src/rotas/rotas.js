@@ -7,9 +7,7 @@ const Nutrition = React.lazy(() => import("../view/nutrition"));
 export default function Rotas() {
     return (
         <Router>
-
             <Routes>
-
                 <Route path="/"
                     exact
                     element={
@@ -25,9 +23,7 @@ export default function Rotas() {
                             <Nutrition />
                         </React.Suspense>
                     } />
-                    
             </Routes>
-
         </Router >
     )
 }
