@@ -9,18 +9,14 @@ const Header = (props) => {
 
     const buscar = document.getElementById("search")
     const input = document.getElementById("inputText")
-    const [search, setSearch] = useState(0)
     const [showContentRes, setShowContentRes] = useState(false)
-
-
-
 
     input?.addEventListener("click", () => {
         buscar.style.opacity = 0
     })
 
     input?.addEventListener("blur", () => {
-        search == 0 ? buscar.style.opacity = 1 : buscar.style.opacity = 0
+        props.search == 0 ? buscar.style.opacity = 1 : buscar.style.opacity = 0
     })
 
 
@@ -73,9 +69,9 @@ const Header = (props) => {
                             <span className="material-symbols-outlined">
                                 search
                             </span>
-                           Search
+                            Oque busca?
                         </div>
-                        <input id="inputText" type="text" onChange={(e) => setSearch(e.target.value)} />
+                        <input id="inputText" type="text" onChange={(e) => props.funcao(e.target.value)} />
                     </div>
                     <div className="shopping-content">
                         <Link to={"/"}>

@@ -22,11 +22,17 @@ const Ecommerce = () => {
 
     const [itens, setItens] = useState()
 
+    const [search, setSearch] = useState()
+
+    const [searchFilter, setSearchFilter] = useState()
+
     const helper = useMemo(() => new Helper(), []);
+
 
     useEffect(() => {
         GetData()
-    }, [initial])
+        handlesFilter()
+    }, [search])
 
     const GetData = () => {
         fetch("http://localhost:3001/fruits")
@@ -34,6 +40,18 @@ const Ecommerce = () => {
             .then((data) => {
                 setData(data)
             })
+    }
+
+    const searchFunc = (valor) => {
+        setSearch(valor)
+    }
+
+    const handlesFilter = () => {
+        const searchWord = search
+        const newFilter = data.filter((value) => {
+            return value.name.includes(searchWord)
+        })
+        setSearchFilter(newFilter)
     }
 
     const mostrarProduto = (e) => {
@@ -98,22 +116,42 @@ const Ecommerce = () => {
     const ContainerCards = () => {
         return (
             <>
-                {data?.map((e, index) => {
-                    return (
-                        <div key={e.id}>
-                            <div className="conteiner-produtos" id="contents" >
-                                <img src={helper.SetImg(e?.id)} alt="" onClick={() => mostrarProduto(e)} />
-                                <div className="texto" >{e?.name}</div>
-                                <Button className="botao-product" variant="contained" style={{ marginBottom: 30, marginTop: 30, backgroundColor: "#31d457" }} color="success" onClick={() => setInitialState(initial.map((e) => e.data.name).includes(e.name) ? [...initial] : [...initial, { data: e }])}>
-                                    <span class="material-symbols-outlined">
-                                        shopping_cart
-                                    </span> add to cart
-                                </Button>
+                {
+                    searchFilter == 0 ? <>{data?.map((e, index) => {
+                        return (
+                            <div key={e.id}>
+                                <div className="conteiner-produtos" id="contents" >
+                                    <img src={helper.SetImg(e?.id)} alt="" onClick={() => mostrarProduto(e)} />
+                                    <div className="texto" >{e?.name}</div>
+                                    <Button className="botao-product" variant="contained" style={{ marginBottom: 30, marginTop: 30, backgroundColor: "#31d457" }} color="success" onClick={() => setInitialState(initial.map((e) => e.data.name).includes(e.name) ? [...initial] : [...initial, { data: e }])}>
+                                        <span class="material-symbols-outlined">
+                                            shopping_cart
+                                        </span> add to cart
+                                    </Button>
+                                </div>
                             </div>
-                        </div>
-                    )
-                })
+                        )
+                    })
+                    }</>
+                        :
+                        <>{searchFilter?.map((e, index) => {
+                            return (
+                                <div key={e.id}>
+                                    <div className="conteiner-produtos" id="contents" >
+                                        <img src={helper.SetImg(e?.id)} alt="" onClick={() => mostrarProduto(e)} />
+                                        <div className="texto" >{e?.name}</div>
+                                        <Button className="botao-product" variant="contained" style={{ marginBottom: 30, marginTop: 30, backgroundColor: "#31d457" }} color="success" onClick={() => setInitialState(initial.map((e) => e.data.name).includes(e.name) ? [...initial] : [...initial, { data: e }])}>
+                                            <span class="material-symbols-outlined">
+                                                shopping_cart
+                                            </span> add to cart
+                                        </Button>
+                                    </div>
+                                </div>
+                            )
+                        })
+                        }</>
                 }
+
             </>
         )
     }
@@ -189,7 +227,7 @@ const Ecommerce = () => {
 
     return (
         <main>
-            <Header showShopping={mostrar} shopping={initial.length} />
+            <Header showShopping={mostrar} shopping={initial.length} funcao={searchFunc} search={search} />
 
             {
                 showContentProduto &&
