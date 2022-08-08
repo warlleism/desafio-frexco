@@ -76,15 +76,15 @@ const Ecommerce = () => {
                                 </div>
                                 <div className="desc-product">
                                     <div className="texto-nome-product" >{e?.name}</div>
-                                    <div className="texto-product" > Carboidrato: {e?.nutritions.carbohydrates}</div>
+                                    <div className="texto-product" > Carbohydrates: {e?.nutritions.carbohydrates}</div>
                                     <div className="texto-product" > Protein: {e?.nutritions.protein}</div>
-                                    <div className="texto-product" > Gordo: {e?.nutritions.fat}</div>
-                                    <div className="texto-product" > Nutritions: {e?.nutritions.calories}</div>
-                                    <div className="texto-product" > Açudar: {e?.nutritions.sugar}</div>
-                                    <Button className="botao-product" variant="contained" color="success" onClick={() => setInitialState(initial.map((e) => e.data.name).includes(e.name) ? [...initial] : [...initial, { data: e }])}>
+                                    <div className="texto-product" > Fat: {e?.nutritions.fat}</div>
+                                    <div className="texto-product" > calories: {e?.nutritions.calories}</div>
+                                    <div className="texto-product" > Sugar: {e?.nutritions.sugar}</div>
+                                    <Button className="botao-product" variant="contained" color="success" style={{ backgroundColor: "#31d457" }} onClick={() => setInitialState(initial.map((e) => e.data.name).includes(e.name) ? [...initial] : [...initial, { data: e }])}>
                                         <span class="material-symbols-outlined">
                                             shopping_cart
-                                        </span>  Carrinho
+                                        </span> add to cart
                                     </Button>
                                 </div>
                             </div>
@@ -104,8 +104,10 @@ const Ecommerce = () => {
                             <div className="conteiner-produtos" id="contents" >
                                 <img src={helper.SetImg(e?.id)} alt="" onClick={() => mostrarProduto(e)} />
                                 <div className="texto" >{e?.name}</div>
-                                <Button className="botao" variant="contained" color="success" onClick={() => setInitialState(initial.map((e) => e.data.name).includes(e.name) ? [...initial] : [...initial, { data: e }])}>
-                                    Carrinho
+                                <Button className="botao-product" variant="contained" style={{ marginBottom: 30, marginTop: 30, backgroundColor: "#31d457" }} color="success" onClick={() => setInitialState(initial.map((e) => e.data.name).includes(e.name) ? [...initial] : [...initial, { data: e }])}>
+                                    <span class="material-symbols-outlined">
+                                        shopping_cart
+                                    </span> add to cart
                                 </Button>
                             </div>
                         </div>

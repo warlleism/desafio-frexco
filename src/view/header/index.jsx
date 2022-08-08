@@ -73,7 +73,7 @@ const Header = (props) => {
                             <span className="material-symbols-outlined">
                                 search
                             </span>
-                            Oque busca?
+                           Search
                         </div>
                         <input id="inputText" type="text" onChange={(e) => setSearch(e.target.value)} />
                     </div>

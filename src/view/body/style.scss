@@ -44,25 +44,6 @@ main {
                 font-weight: 600;
             }
 
-            .botao {
-                text-align: center;
-                width: 80%;
-                border: rgba(0, 0, 0, 0.097) solid 1px;
-                font-weight: 700;
-                border-radius: 10px;
-                margin: 20px 0px 20px 0px;
-                background-color: rgba(49, 212, 87, 0.293);
-                padding: 15px 0px 15px 0px;
-                color: rgb(41, 113, 58);
-                transition: 0.5s;
-            }
-
-            .botao:hover {
-                background-color: rgba(49, 212, 87, 0.933);
-                color: white;
-                transition: 0.5s
-            }
-
             .info-content {
                 z-index: 999;
                 position: absolute;

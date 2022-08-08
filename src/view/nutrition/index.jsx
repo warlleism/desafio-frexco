@@ -32,11 +32,11 @@ const Info = (props) => {
                                 <div key={e?.id} className="conteiner-produtos-info">
                                     <div className="desc-info">
                                         <div className="texto-nome" >{e?.name}</div>
-                                        <div className="texto" > Carboidrato: {e?.nutritions.carbohydrates}</div>
+                                        <div className="texto" > Carbohydrates: {e?.nutritions.carbohydrates}</div>
                                         <div className="texto" > Protein: {e?.nutritions.protein}</div>
-                                        <div className="texto" > Gordo: {e?.nutritions.fat}</div>
-                                        <div className="texto" > Nutritions: {e?.nutritions.calories}</div>
-                                        <div className="texto" > Açudar: {e?.nutritions.sugar}</div>
+                                        <div className="texto" > Fat: {e?.nutritions.fat}</div>
+                                        <div className="texto" > Calories: {e?.nutritions.calories}</div>
+                                        <div className="texto" > Sugar: {e?.nutritions.sugar}</div>
                                     </div>
                                     <div className="img-info">
                                         <img src={helper.SetImg(e?.id)} alt="" />
