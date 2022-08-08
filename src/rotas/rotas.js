@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 const Main = React.lazy(() => import("../view/body"));
-const Info = React.lazy(() => import("../view/info"));
+const Nutrition = React.lazy(() => import("../view/nutrition"));
 
 
 export default function Rotas() {
@@ -18,14 +18,14 @@ export default function Rotas() {
                         </React.Suspense>
                     } />
 
-                <Route path="/info"
+                <Route path="/nutrition"
                     exact
                     element={
                         <React.Suspense fallback='Carregando...'>
-                            <Info />
+                            <Nutrition />
                         </React.Suspense>
                     } />
-
+                    
             </Routes>
 
         </Router >

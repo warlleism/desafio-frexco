@@ -3,6 +3,7 @@ main {
     height: 100vh;
     position: relative;
     overflow-x: hidden;
+    scroll-behavior: smooth;
 
     .conteiner {
         width: 100%;
@@ -113,20 +114,24 @@ main {
 
             display: flex;
             width: 100%;
-            height: 100vh;
 
             .shopping-msg-clear {
+                margin-top: 200px;
                 display: flex;
+                justify-content: center;
                 align-items: center;
-                position: absolute;
-                top: 30%;
-                left: 30%;
+                width: 100%;
                 color: rgba(11, 82, 223, 0.116);
                 font-size: 3.5rem;
                 font-weight: 700;
 
-                span {
-                    font-size: 200px;
+                .container-msg-car {
+                    text-align: center;
+                    width: 90%;
+
+                    span {
+                        font-size: 200px;
+                    }
                 }
             }
         }
@@ -215,14 +220,60 @@ main {
 }
 
 
-@media screen and (max-width: 1040px) {
+@media screen and (max-width: 1200px) {
     .container-content-info {
         .content-info {
             width: 100%;
+            justify-content: center;
 
             .container-block-content {
-                width: 90% !important;
+                width: 60% !important;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+                .container-img {
+                    width: 100% !important;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                .add-shopping {
+                    margin: 20px 0px 20px 0px;
+                }
+            }
+
+
+        }
+    }
+
+    .shopping-content {
+        .shopping-msg-clear {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            align-items: center;
+            color: rgba(11, 82, 223, 0.116);
+            font-size: 2rem;
+
+            span {
+                font-size: 200px;
             }
         }
     }
+
+}
+
+
+@media screen and (max-width: 887px) {
+
+    .shopping-content {
+        .shopping-msg-clear {
+            span {
+                font-size: 200px;
+            }
+        }
+    }
+
 }

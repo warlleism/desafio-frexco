@@ -31,17 +31,35 @@ const Header = (props) => {
 
 
     const mostrar = (status) => {
-        setShowContentRes(!status)
-        setTimeout(() => {
-            showContent(0)
-        }, 200)
+
+        if (showContentRes == false) {
+            setShowContentRes(!status)
+            setTimeout(() => {
+                showContent(0)
+            }, 200)
+        }
+        if (showContentRes == true) {
+            showContent(100)
+            setTimeout(() => {
+                setShowContentRes(!status)
+            }, 600)
+        }
+    }
+
+    const navegationResponsive1 = () => {
+        setShowContentRes(false)
+        props.showShopping(true)
+    }
+    const navegationResponsive2 = () => {
+        setShowContentRes(false)
+        props.showShopping(false)
     }
 
 
     return (
         <>
             <div className="header-container">
-                <div style={{ float: "right", padding: "10px", fontSize: "20px" }}>
+                <div style={{ float: "right", padding: "10px", fontSize: "20px", cursor: "pointer" }}>
                     <span class="material-symbols-outlined" style={{ fontSize: "30px", color: "#ffff", background: "#89bd23", borderRadius: "20px" }} onClick={() => props.showShopping(true)}>
                         arrow_back
                     </span>
@@ -66,7 +84,6 @@ const Header = (props) => {
                         <div>{props.shopping}</div>
                         <a href="#item1">
                             <img src={Nutri} alt="" style={{ maxWidth: "40px", cursor: "pointer" }} />
-
                         </a>
                     </div>
                 </div>
@@ -74,7 +91,7 @@ const Header = (props) => {
 
             <div className="responsive-content">
                 <div className="container-menu">
-                    <img src={Fresco} alt="" srcset="" />
+                    <img src={Fresco} alt="" srcset="" onClick={() => navegationResponsive1()} />
                     <span class="material-symbols-outlined" id="menu-responsive" onClick={() => mostrar(showContentRes)}>
                         menu
                     </span>
@@ -85,9 +102,15 @@ const Header = (props) => {
                         <>
                             <div className="container-content-responsive" id="container-responsive">
                                 <ul>
-                                    <li onClick={() => mostrar(true)} >Home</li>
-                                    <li>Shop</li>
-                                    <Link to={"/info"}>Nutrições</Link>
+                                    <li onClick={() => navegationResponsive1()}>
+                                        <Link to={"/"}>
+                                            home
+                                        </Link>
+                                    </li>
+                                    <li onClick={() => navegationResponsive2()}>Shop</li>
+                                    <a href="#item1" onClick={() => navegationResponsive1()}>
+                                        Nutrição
+                                    </a>
                                 </ul>
                             </div>
                         </>

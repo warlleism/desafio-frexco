@@ -3,10 +3,11 @@ import { DotLoader } from "react-spinners";
 import Header from "../header";
 import Excluir from "../../icons/excluir.png"
 import Helper from "../../components";
-import Info from "../info"
+import Info from "../nutrition"
 
 
 import "./style.scss"
+import { Button } from "@mui/material";
 
 const Ecommerce = () => {
 
@@ -63,7 +64,9 @@ const Ecommerce = () => {
                             <div className="conteiner-produtos" id="contents" >
                                 <img src={helper.SetImg(e?.id)} alt="" />
                                 <div className="texto" >{e?.name}</div>
-                                <div className="botao" onClick={() => setInitialState(initial.map((e) => e.data.name).includes(e.name) ? [...initial] : [...initial, { data: e, qtd: 1 }])}>Adicionar</div>
+                                <Button className="botao" variant="contained" color="success" onClick={() => setInitialState(initial.map((e) => e.data.name).includes(e.name) ? [...initial] : [...initial, { data: e }])}>
+                                    Carrinho
+                                </Button>
                             </div>
                         </div>
                     )
@@ -78,6 +81,15 @@ const Ecommerce = () => {
         setInitialState((items) => items.filter((_, i) => i !== index))
     }
 
+    const count = (dado) => {
+        initial.map((data) => {
+            let nomes = data.data.name
+            const ocorrencias = (nomes.match(dado) || []).length;
+            console.log(data.data.name)
+        })
+
+
+    }
 
     const carContainerSell = () => {
         return (
@@ -92,11 +104,13 @@ const Ecommerce = () => {
                     <>
                         <div className="shopping-content">
                             <div className="shopping-msg-clear">
-                                <div>Seu Carrinho está vazio</div>
-                                <div>
-                                    <span class="material-symbols-outlined">
-                                        shopping_cart
-                                    </span>
+                                <div className="container-msg-car">
+                                    <div className="msg-car">Seu Carrinho está vazio</div>
+                                    <div>
+                                        <span class="material-symbols-outlined">
+                                            shopping_cart
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -118,13 +132,13 @@ const Ecommerce = () => {
                                             </div>
                                             <div className="add-shopping" >
                                                 <div>
-                                                    <span className="material-symbols-outlined">
+                                                    <span className="material-symbols-outlined" onClick={() => setInitialState(initial.map((a) => a.data.name).includes(e.data.name) ? [...initial, { data: e.data }] : [...initial])}>
                                                         add
                                                     </span>
                                                 </div>
-                                                <div>{e?.qtd}</div>
+
                                                 <div>
-                                                    <span className="material-symbols-outlined">
+                                                    <span className="material-symbols-outlined" onClick={() => setItens(deleteItem(index))}>
                                                         remove
                                                     </span>
                                                 </div>
@@ -144,10 +158,7 @@ const Ecommerce = () => {
     return (
         <main>
             <Header showShopping={mostrar} shopping={initial.length} />
-            {data.length == 0 ? SpinnerLoad() : <>{showContainer ? false : <div style={{ overflow: "hidden" }}> {carContainerSell()} </div>} <div className="conteiner">{showContainer ? <> {ContainerCards()} <div id="item1">{<Info  />}</div> </> : false}</div></>}
-
-
-
+            {data.length == 0 ? SpinnerLoad() : <>{showContainer ? false : <div style={{ overflow: "hidden" }}> {carContainerSell()} </div>} <div className="conteiner">{showContainer ? <> {ContainerCards()} <div id="item1">{<Info />}</div> </> : false}</div></>}
         </main>
     )
 }
