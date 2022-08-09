@@ -25,7 +25,7 @@ const Info = (props) => {
         return (
             <>
                 <div className="main-info">
-                    <div style={{ textAlign: "center", fontSize: "2rem", color: "#16bf9a", fontWeight: "600", marginBottom: 100, marginTop: 100 }}>NUTRIENTES</div>
+                    <div style={{ textAlign: "center", fontSize: "2rem", color: "#16bf9a", fontWeight: "600", marginBottom: 100, marginTop: 100 }}>NUTRIENTS</div>
                     <div className="info-conteiner">
                         {data?.map((e, index) => {
                             return (
