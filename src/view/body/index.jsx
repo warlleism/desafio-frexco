@@ -200,7 +200,7 @@ const Ecommerce = () => {
                                                 <div>Açucar : {e?.data?.nutritions?.sugar}</div>
                                                 <div>Calorias : {e?.data?.nutritions?.calories}</div>
                                             </div>
-                                            <div className="add-shopping" >
+                                            <div className="add-shopping">
                                                 <div>
                                                     <span className="material-symbols-outlined" onClick={() => setInitialState(initial.map((a) => a.data.name).includes(e.data.name) ? [...initial, { data: e.data }] : [...initial])}>
                                                         add
